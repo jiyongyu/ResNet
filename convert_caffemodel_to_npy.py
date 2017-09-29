@@ -3,6 +3,8 @@
 import os
 from contextlib import contextmanager
 
+CAFFE_PROTO_URL = "https://github.com/BVLC/caffe/raw/master/src/caffe/proto/caffe.proto"
+
 @contextmanager
 def change_env(name, val):
     """
@@ -97,7 +99,7 @@ class CaffeLayerProcessor(object):
         raise ValueError()
 
 def load_caffe(model_desc, model_file):
-    """ 
+    """
     Load a caffe model. Must ''import caffe'' to use this function
     Args:
         model_desc(str): path to caffe model description file (.prototxt)
