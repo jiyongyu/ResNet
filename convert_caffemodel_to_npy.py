@@ -1,5 +1,26 @@
 #!/usr/bin/env python
 
+import os
+from contextlib import contextmanager
+
+@contextmanager
+def change_env(name, val):
+    """
+    Args:
+        name(str), val(str)
+
+    Returns:
+        a context where the environment variable ``name`` being set to
+        ``val``. It will be set back after the context exits.
+    """
+    oldval = os.environ.get(name, None)
+    os.environ[name] = val
+    yield
+    if oldval is None:
+        del os.environ[name]
+    else:
+        os.environ[name] = oldval
+
 class CaffeLayerProcessor(object):
 
     def __init__(self, net):
